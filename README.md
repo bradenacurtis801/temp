@@ -175,4 +175,6 @@ if __name__ == '__main__':
 
 ## This README provides a comprehensive guide on setting up and running the GPU usage billing script. If you have any questions or need further assistance, feel free to reach out.
 
-## Take a look at https://github.com/dashpole/example-gpu-monitor.git for more gpu monitoring examples
+### Take a look at following repos for more gpu monitoring examples:
+- https://github.com/nawafalageel/docker_container_gpu_exporter.git
+- https://github.com/dashpole/example-gpu-monitor.git 
