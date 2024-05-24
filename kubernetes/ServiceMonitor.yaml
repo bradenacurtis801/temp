@@ -1,0 +1,16 @@
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  name: fooocus-api
+  namespace: foocus-api
+  labels:
+    release: prometheus  # Match this to your Prometheus release name if using Helm
+spec:
+  selector:
+    matchLabels:
+      app: fooocus-api
+  endpoints:
+    - port: metrics  # Name of the port in the service exposing metrics
+      interval: 15s
+      path: /metrics
+

@@ -1,0 +1,49 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: fooocus-api
+  namespace: foocus-api
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: fooocus-api
+  template:
+    metadata:
+      labels:
+        app: fooocus-api
+    spec:
+      containers:
+        - name: container-0
+          image: konieshadow/fooocus-api
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 8888
+              name: fooocusapi-cip
+              protocol: TCP
+          readinessProbe:
+            httpGet:
+              path: /ping
+              port: fooocusapi-cip
+            initialDelaySeconds: 10
+            periodSeconds: 5
+          env:
+            - name: NVIDIA_DRIVER_CAPABILITIES
+              value: "compute,utility"
+            - name: NVIDIA_VISIBLE_DEVICES
+              value: "all"
+        - name: proxy-sidecar
+          image: bradenacurtis801/mitmproxy-sidecar:latest
+          ports:
+            - containerPort: 8080
+            - containerPort: 9001
+          resources:
+            limits:
+              nvidia.com/gpu: '1'
+            requests:
+              nvidia.com/gpu: '1'
+          securityContext:
+            allowPrivilegeEscalation: false
+            privileged: false
+            readOnlyRootFilesystem: false
+      runtimeClassName: nvidia
