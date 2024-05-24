@@ -20,7 +20,7 @@ Create a virtual environment and install the required Python packages:
 ```sh
 python3 -m venv venv
 source venv/bin/activate
-pip install grpcio grpcio-tools requests gogo-python
+pip install -r requirements.txt
 ```
 
 ### 2. Generate Protobuf Files
