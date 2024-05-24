@@ -14,7 +14,7 @@ Outputs GPU utilization for specified namespaces.
 - gRPC and Prometheus Python libraries.
 
 ## Setup Instructions
-1. Install Python and Required Libraries
+### 1. Install Python and Required Libraries
 Create a virtual environment and install the required Python packages:
 
 ```sh
@@ -23,7 +23,7 @@ source venv/bin/activate
 pip install grpcio grpcio-tools requests gogo-python
 ```
 
-2. Generate Protobuf Files
+### 2. Generate Protobuf Files
 Clone the Kubernetes repository to get the protobuf definitions:
 
 ```sh
@@ -31,20 +31,20 @@ git clone https://github.com/kubernetes/kubernetes.git
 cd kubernetes/staging/src/k8s.io/kubelet/pkg/apis/podresources/v1
 ```
 
-## Generate the Python code from the .proto file:
+#### Generate the Python code from the .proto file:
 
 ```sh
 python -m grpc_tools.protoc -I. --python_out=. --grpc_python_out=. api.proto
 ```
 
-## Move the generated api_pb2.py and api_pb2_grpc.py files to your project directory:
+#### Move the generated api_pb2.py and api_pb2_grpc.py files to your project directory:
 
 ```sh
 cp api_pb2.py api_pb2_grpc.py /path/to/your/project
 ```
 
-3. Prepare the Project Directory
-Make sure your project directory has the following structure:
+### 3. Prepare the Project Directory
+#### Make sure your project directory has the following structure:
 
 ```sh
 my_project/
@@ -55,9 +55,9 @@ my_project/
 └── requirements.txt
 ```
 
-4. Create Kubernetes Deployment
+### 4. Create Kubernetes Deployment
 
-## Create a Kubernetes deployment to run the script:
+#### Create a Kubernetes deployment to run the script:
 
 ```yaml
 apiVersion: apps/v1
@@ -96,21 +96,21 @@ spec:
       serviceAccountName: your-service-account
 ```
 
-5. Run the Script
-## To run the script, use the following command:
+### 5. Run the Script
+#### To run the script, use the following command:
 
 ```sh
 sudo /home/ubuntu/temp/venv/bin/python3 dcgm.py
 ```
 
-## Script Overview
-### The script dcgm.py performs the following tasks:
+#### Script Overview
+##### The script dcgm.py performs the following tasks:
 
 - Connects to the Kubelet's pod-resources API to get a list of GPU devices assigned to pods.
 - Queries Prometheus to get GPU utilization metrics.
 - Filters the metrics based on the namespace and outputs the results.
 
-Example dcgm.py Script
+#### Example dcgm.py Script
 ```python
 import grpc
 import requests
