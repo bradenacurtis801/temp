@@ -1,7 +1,8 @@
 
 generate_img() {
+  local domain="$1"
 
-  curl -X POST http://foocus-api.secure/v1/generation/text-to-image \
+  curl -X POST "http://${domain}/v1/generation/text-to-image" \
   -H "Content-Type: application/json" \
   -d '{
     "prompt": "elephant",
@@ -21,6 +22,7 @@ generate_img() {
     "webhook_url": ""
   }'
 }
+
 
 
 get_token_stats() {
